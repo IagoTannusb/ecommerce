@@ -176,7 +176,7 @@ Abaixo, a descrição dos quatro datasets principais que alimentam o Data Lakeho
 
 ## 📈 7. Inteligência de Negócio (Perguntas Respondidas)
 
-O projeto foi desenhado para responder diretamente aos requisitos do [PERGUNTAS_NEGOCIO.md](./PERGUNTAS_NEGOCIO.md), entregando insights acionáveis para diferentes áreas:
+O projeto foi desenhado para responder diretamente aos requisitos do perguntas_negocio.md, entregando insights acionáveis para diferentes áreas:
 
 ### **A. Performance Financeira (CFO)**
 - **Qual a saúde do faturamento?** Monitoramento de Receita Total, Ticket Médio e Volume de Pedidos.
@@ -198,5 +198,3 @@ O projeto foi desenhado para responder diretamente aos requisitos do [PERGUNTAS_
 - **Risco de Concentração:** Análise da dependência do faturamento sobre o Top 10 SKUs do portfólio.
 
 ---
-
-**Desenvolvido por [Iago Tannus]** - Engenheiro de Dados focado em Cloud e Modern Data Stack.
