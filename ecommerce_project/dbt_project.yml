@@ -1,0 +1,54 @@
+# dbt project configuration file
+
+name: 'ecommerce_project'
+version: '1.0.0'
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'ecommerce_project'
+
+# These configurations specify where dbt should look for different types of files.
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# CONFIGURAÇÕES DE MODELOS POR CAMADA (ESTRUTURA MEDALHÃO)
+models:
+  ecommerce_project:
+    # Camada Bronze: Staging (Apenas visualização das fontes originais)
+    bronze:
+      +materialized: view
+      +tags: ["bronze", "staging"]
+    
+    # Camada Silver: Intermediate (Dados limpos e tipados salvos no S3)
+    silver:
+      +materialized: table
+      +format: parquet  # EXCLUSIVO PARA ATHENA: Otimiza armazenamento e performance
+      +tags: ["silver", "cleansed"]
+    
+    # Camada Gold: Business Layer (Data Marts segmentados)
+    gold:
+      +materialized: table
+      +format: parquet
+      +tags: ["gold", "kpi"]
+      
+      # Divisão por Área de Negócio (Data Marts/Data Domains)
+      finance:
+        +tags: ["finance"]
+      commercial:
+        +tags: ["commercial"]
+      marketing:
+        +tags: ["marketing"]
+      operations:
+        +tags: ["operations"]
+
+# VARIÁVEIS GLOBAIS (Configurações de negócio)
+vars:
+  segmentacao_vip_threshold: 10000

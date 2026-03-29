@@ -1,0 +1,48 @@
+version: 2
+
+sources:
+  - name: raw_data  # Nome de referência que usaremos nos seus modelos (ex: {{ source('raw_data', 'vendas') }})
+    description: "Dados brutos ingeridos via Python e catalogados no AWS Glue (Banco: raw)"
+    database: awsdatacatalog  # Fixo para integração dbt-athena
+    schema: raw               # Nome real do banco de dados na sua AWS (Glue)
+    tables:
+      - name: produtos
+        description: "Catálogo de produtos com preços atuais e categorias"
+        columns:
+          - name: id_produto
+            description: "Chave primária do produto"
+          - name: nome_produto
+          - name: categoria
+          - name: marca
+          - name: preco_atual
+          - name: data_criacao
+
+      - name: clientes
+        description: "Cadastro de clientes e localização geográfica"
+        columns:
+          - name: id_cliente
+            description: "Chave primária do cliente"
+          - name: nome_cliente
+          - name: estado
+          - name: pais
+          - name: data_cadastro
+
+      - name: vendas
+        description: "Registro de transações de vendas do e-commerce"
+        columns:
+          - name: id_venda
+            description: "ID único da transação"
+          - name: data_venda
+          - name: id_cliente
+          - name: id_produto
+          - name: canal_venda
+          - name: quantidade
+          - name: preco_unitario
+
+      - name: preco_competidores
+        description: "Dados de monitoramento de preços do mercado (benchmarking)"
+        columns:
+          - name: id_produto
+          - name: nome_concorrente
+          - name: preco_concorrente
+          - name: data_coleta

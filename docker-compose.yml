@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  ecommerce-dash:
+    build: .
+    container_name: ecommerce-analytics-dash
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    # Isso permite o hot-reload: se você mudar o código no VS Code, o Dash no Umbrel atualiza na hora!
+
+networks:
+  default:
+    name: umbrel_main

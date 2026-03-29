@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: fct_vendas_performance
+    description: "Tabela consolidada de faturamento por venda, cliente e produto para análise financeira."
+    columns:
+      - name: id_venda
+        description: "ID único da venda"
+        tests:
+          - unique
+          - not_null
+      - name: receita_total
+        description: "Valor total bruto da venda (quantidade * preco_venda)"
+        tests:
+          - not_null
+      - name: data_venda_date
+        description: "Data da venda em formato DATE"
+        tests:
+          - not_null
+      - name: uf_cliente
+        description: "Estado do cliente para análise regional"
+        tests:
+          - not_null
+
+  - name: fct_competitividade_precos
+    description: "Análise comparativa de preços internos vs competidores para o Data Mart Comercial."
+    columns:
+      - name: id_produto
+        description: "ID único do produto"
+        tests:
+          - unique
+          - not_null
+      - name: preco_nossas_lojas
+        description: "Preço atual praticado no nosso e-commerce"
+        tests:
+          - not_null
+      - name: preco_medio_mercado
+        description: "Média de preços dos concorrentes mapeados"
+        tests:
+          - not_null
+
+  - name: fct_segmentacao_clientes
+    description: "Classificação RFM e Curva ABC de clientes para o Data Mart de Marketing."
+    columns:
+      - name: id_cliente
+        description: "ID único do cliente"
+        tests:
+          - unique
+          - not_null
+      - name: curva_abc
+        description: "Classificação do cliente baseada no faturamento (Pareto)"
+        tests:
+          - not_null
+      - name: status_fidelidade
+        description: "Classificação do cliente baseada na recência (Ativo, Risco, Churn)"
+        tests:
+          - not_null
+
+  - name: fct_saude_portfolio
+    description: "Análise de giro de estoque e produtos 'Zumbi' para o Data Mart de Operações."
+    columns:
+      - name: id_produto
+        description: "ID único do produto"
+        tests:
+          - unique
+          - not_null
+      - name: dias_sem_venda
+        description: "Quantidade de dias desde a última venda registrada do SKU"
+        tests:
+          - not_null
+      - name: status_estoque
+        description: "Classificação de saúde do produto (Ativo, Baixo Giro, Zumbi)"
+        tests:
+          - not_null
